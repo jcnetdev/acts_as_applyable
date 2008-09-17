@@ -5,14 +5,12 @@ module ActiveRecord
         base.extend ClassMethods
         base.class_eval do
           include ActiveRecord::Acts::Applyable::InstanceMethods
-          cattr_accessor :accessible_attributes
-          self.accessible_attributes = []
         end
       end
       
       module ClassMethods
         def acts_as_applyable(*accessible_attributes)
-          self.accessible_attributes = accessible_attributes
+          @@accessible_attributes = accessible_attributes
         end
       end
       
@@ -31,7 +29,7 @@ module ActiveRecord
 
           # build attributes hash
           attributes = {}
-          attribute_list = accessible_attributes if attribute_list.empty?
+          attribute_list = (@@accessible_attributes || []) if attribute_list.empty?
           attribute_list.each do |attribute|
             attributes[attribute] = self.params[attribute.to_s]
           end
