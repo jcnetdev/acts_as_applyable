@@ -10,7 +10,8 @@ module ActiveRecord
       
       module ClassMethods
         def acts_as_applyable(*accessible_attributes)
-          @@accessible_attributes = accessible_attributes
+          cattr_accessor :accessible_attribute_list
+          self.accessible_attribute_list = accessible_attributes
         end
       end
       
@@ -26,10 +27,11 @@ module ActiveRecord
         
         def apply_set_attributes(*attribute_list)
           self.params.stringify_keys!
-
+          @@accessible_attribute_list ||= []
+          
           # build attributes hash
           attributes = {}
-          attribute_list = (@@accessible_attributes || []) if attribute_list.empty?
+          attribute_list = @@accessible_attribute_list if attribute_list.empty?
           attribute_list.each do |attribute|
             attributes[attribute] = self.params[attribute.to_s]
           end
