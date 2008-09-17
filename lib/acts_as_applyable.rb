@@ -3,14 +3,16 @@ module ActiveRecord
     module Applyable
       def self.included(base)
         base.extend ClassMethods
+        base.class_eval do
+          include ActiveRecord::Acts::Applyable::InstanceMethods
+          cattr_accessor :accessible_attributes
+          self.accessible_attributes = []
+        end
       end
       
       module ClassMethods
         def acts_as_applyable(*accessible_attributes)
-          cattr_accessor :accessible_attributes
           self.accessible_attributes = accessible_attributes
-
-          include ActiveRecord::Acts::Applyable::InstanceMethods
         end
       end
       
