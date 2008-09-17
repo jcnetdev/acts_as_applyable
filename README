@@ -1,0 +1,26 @@
+ActsAsApplyable
+===============
+
+acts_as_applyable is a Rails plugin that allows you to ditch attr_accessible and attr_protected, in favor of a cleaner way of dealing with mass assignment
+
+Example
+=======
+
+Old way:
+@user = User.new(params[:user])
+@user.save
+
+New way:
+@user = User.new
+@user.params = params[:user]
+@user.apply(:username, :email, :password, :password_confirmation)
+
+In order to enable it, run this on your model
+acts_as_applyable
+
+If you want to act similar to attr_accessible, you can pass it in a list of default attributes
+acts_as_applyable :username, :email, :password, :password_confirmation
+
+that way you can run @user.apply and it will use these
+
+Copyright (c) 2008 RailsJedi.com, released under the MIT license
