@@ -16,10 +16,13 @@ New way:
 @user.apply(:username, :email, :password, :password_confirmation)
 
 In order to enable it, run this on your model
-acts_as_applyable
 
-If you want to act similar to attr_accessible, you can pass it in a list of default attributes
-acts_as_applyable :username, :email, :password, :password_confirmation
+If you want to act similar to attr_accessible, you can define a method called applyable_attributes that returns
+the array of fields you want to appy by default.
+
+def applyable_fields
+ [:name, :email, :password]
+end
 
 that way you can run @user.apply and it will use these
 
