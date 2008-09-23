@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name = 'acts_as_applyable'
-  s.version = '0.4'
-  s.date = '2008-09-19'
+  s.version = '0.5'
+  s.date = '2008-09-22'
   
   s.summary = "A better (and safer) way of applying model attributes from your controller params"
   s.description = "Rid yourself of attr_accessible and attr_protected. This plugin allows you to stop using mass assignment, and gives you a more flexible way of interacting with your controller params."

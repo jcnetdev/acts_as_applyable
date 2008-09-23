@@ -8,12 +8,12 @@ module ActiveRecord
         end
       end
       
-      module ClassMethods
-        def acts_as_applyable(*accessible_attributes)
-          cattr_accessor :accessible_attribute_list
-          self.accessible_attribute_list = accessible_attributes
-        end
-      end
+      # module ClassMethods
+      #   def acts_as_applyable(*accessible_attributes)
+      #     cattr_accessor :accessible_attribute_list
+      #     self.accessible_attribute_list = accessible_attributes
+      #   end
+      # end
       
       module InstanceMethods
         def params
